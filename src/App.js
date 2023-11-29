@@ -15,7 +15,7 @@ import Profile from "./pages/Profile";
 
 import io from "socket.io-client";
 import TestCall from "./pages/TestCall";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const socket = io(process.env.REACT_APP_URL_SERVER);
@@ -40,6 +40,7 @@ const App = () => {
     socket.on("disconnect", () => {
       console.log("Disconnected from server:", socket.id);
     });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (
     <BrowserRouter>
