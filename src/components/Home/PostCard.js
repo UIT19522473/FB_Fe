@@ -25,21 +25,22 @@ import { apiGetPostById } from "../../apis/apiPost";
 
 const socket = io(process.env.REACT_APP_URL_SERVER);
 
-
 const PostCard = (props) => {
   const dispatch = useDispatch();
   //const { post } = props;
   const [post, setPost] = useState(props.post);
   useEffect(() => {
-    if (post) socket.on(`${post._id}`, async () => {
-      const postCurrent = await apiGetPostById({
-        token: inforAuth?.tokens?.accessToken,
-        id: post._id
+    if (post)
+      socket.on(`${post._id}`, async () => {
+        const postCurrent = await apiGetPostById({
+          token: inforAuth?.tokens?.accessToken,
+          id: post._id,
+        });
+        //console.log('Post current ', postCurrent.data.metadata.post)
+        setPost(postCurrent.data.metadata.post);
       });
-      //console.log('Post current ', postCurrent.data.metadata.post)
-      setPost(postCurrent.data.metadata.post);
-    })
-  }, [])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const auth = useSelector((state) => state.auth?.data?.user);
   const inforAuth = useSelector((state) => state.auth?.data);
@@ -83,9 +84,14 @@ const PostCard = (props) => {
         },
         token: inforAuth?.tokens?.accessToken,
       });
-      console.log('call 1');
-      socket.emit('call-notify', ({ email: post.userId.email, text: 'đã phản hồi bài viết', name: auth.name, emailSend: auth.email }))
-      socket.emit('update-post', ({ id: post._id }));
+      console.log("call 1");
+      socket.emit("call-notify", {
+        email: post.userId.email,
+        text: "đã phản hồi bài viết",
+        name: auth.name,
+        emailSend: auth.email,
+      });
+      socket.emit("update-post", { id: post._id });
       dispatch(getAllPosts({ token: inforAuth?.tokens?.accessToken }));
     }
   };

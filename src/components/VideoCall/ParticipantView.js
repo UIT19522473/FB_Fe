@@ -36,9 +36,6 @@ const ParticipantView = (props) => {
     }
   }, [micStream, micOn]);
 
-  const widthScreen = window.innerWidth;
-  const heightScreen = window.innerHeight;
-
   return (
     <div>
       <p className="text-white">

@@ -18,7 +18,6 @@ import {
   removeCacheMess,
 } from "../../features/chatPrivate/chatPriaveSlice";
 import ChatBox from "./ChatBox";
-import { addToAllMessGroup } from "../../features/chatGroup/chatGroupSlice";
 // import { addNotify } from "../../features/notify/notifySlice";
 // import { apiGetChatGroup } from "../../apis/apiChatGroup";
 // import { getGroupChat } from "../../features/chatGroup/chatGroupAsync";
@@ -68,9 +67,8 @@ const WrapChat = () => {
   const [userSend, setUserSend] = useState("");
   const [userReceive, setUserReceive] = useState("");
   const [meetingId, setMeetingId] = useState("");
-  const [idRoom, setIdRoom] = useState("");
-  const [accept, setAccept] = useState("");
 
+  // eslint-disable-next-line no-unused-vars
   const [call_id, setCall_id] = useState("");
 
   const Accept = () => {
@@ -95,7 +93,7 @@ const WrapChat = () => {
       setUserSend(userSend);
       setUserReceive(userReceive);
       setCall_id(call_id);
-      if (type == 0) {
+      if (type === 0) {
         setShow(true);
       }
       //End Phuc code

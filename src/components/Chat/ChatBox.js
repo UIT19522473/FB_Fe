@@ -1,3 +1,4 @@
+/* eslint-disable array-callback-return */
 import React, { useEffect, useRef, useState } from "react";
 import "../../styles/chat.css";
 // import FacebookIcon from "../../images/facebook.svg";
@@ -68,6 +69,7 @@ const ChatBox = (props) => {
     } else {
       dispatch(removeCacheMess({ idSend: auth?._id, idReceive: user?._id }));
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // console.log("log test", user);
@@ -206,9 +208,6 @@ const ChatBox = (props) => {
         });
       }
     }
-  };
-  const test = () => {
-    console.log("test");
   };
 
   const handleCall = async () => {

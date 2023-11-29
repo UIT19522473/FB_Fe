@@ -7,15 +7,12 @@ import { useParams } from "react-router-dom";
 import { apiGetUserCalled } from "../../apis/apiSearch";
 import { useSelector } from "react-redux";
 
-import { useLocation, useNavigate } from "react-router-dom";
 import { HiPhoneMissedCall } from "react-icons/hi";
 
 import io from "socket.io-client";
 const socket = io(process.env.REACT_APP_URL_SERVER);
 
 const MeetingView = (props) => {
-  const navigate = useNavigate();
-
   const search = window.location.search;
   const acceptQuery = new URLSearchParams(search).get("accept");
 
@@ -58,6 +55,7 @@ const MeetingView = (props) => {
     if (agreeJoinCall) {
       joinMeeting();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [agreeJoinCall]);
 
   useEffect(() => {
@@ -71,7 +69,7 @@ const MeetingView = (props) => {
       });
 
       socket.on(`acceptCallReceived`, (data) => {
-        const { userSend, userReceive, meetingId, accept } = data;
+        const { accept } = data;
         if (accept) {
           // joinMeeting();
           setAgreeJoinCall(true);

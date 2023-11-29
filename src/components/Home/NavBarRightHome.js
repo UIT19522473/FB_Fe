@@ -39,19 +39,6 @@ const NavBarRightHome = () => {
     fetchData();
   }, [auth?.data?.tokens?.accessToken]); // Đảm bảo rằng 'useEffect' chỉ chạy một lần sau khi mount component
 
-  // fake group chat
-  const groupChat = {
-    _id: 123,
-    members: [
-      { _id: 123, name: "tuan", img: "demo" },
-      { _id: 124, name: "duyen", img: "demo" },
-      { _id: 125, name: "duy", img: "demo" },
-    ],
-    message: [],
-    name: "Group Test",
-    img: "https://phucnvh.s3.ap-southeast-1.amazonaws.com/image_group.jpeg",
-  };
-
   const acessToken = useSelector(
     (state) => state.auth?.data?.tokens?.accessToken
   );

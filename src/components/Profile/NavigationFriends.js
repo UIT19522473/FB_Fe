@@ -1,11 +1,9 @@
 import React, { useEffect, useState } from "react";
 import "../../styles/profile.css";
 import { useLocation, useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
 
 const NavigationButton = (props) => {
-  const auth = useSelector((state) => state.auth?.data?.user);
-  const { path, name, idU } = props;
+  const { path, name } = props;
   const location = useLocation();
   const navigate = useNavigate();
 

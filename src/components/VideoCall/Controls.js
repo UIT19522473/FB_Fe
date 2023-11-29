@@ -1,6 +1,5 @@
 import { useMeeting } from "@videosdk.live/react-sdk";
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
 
 import { HiPhoneMissedCall } from "react-icons/hi";
 import {
