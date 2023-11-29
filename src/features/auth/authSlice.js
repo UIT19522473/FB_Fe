@@ -25,6 +25,12 @@ export const authSlice = createSlice({
     // incrementByAmount: (state, action) => {
     //   state.value += action.payload;
     // },
+    logOut: (state, action) => {
+      state.isLoading = false;
+      state.success = false;
+      state.mes = "";
+      state.data = null;
+    },
   },
 
   //    Code logic xử lý async action
@@ -56,6 +62,6 @@ export const authSlice = createSlice({
 });
 
 // Action creators are generated for each case reducer function
-// export const { increment, decrement, incrementByAmount } = counterSlice.actions;
+export const { logOut } = authSlice.actions;
 
 export default authSlice.reducer;

@@ -14,11 +14,16 @@ import RightItem from "./Home/RightItem";
 import { useSelector, useDispatch } from "react-redux";
 import { Select } from "antd";
 import { getUsers } from "../features/search/searchAsync";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import io from "socket.io-client";
 import { addNotify } from "../features/notify/notifySlice";
 import { getGroupChat } from "../features/chatGroup/chatGroupAsync";
+
+import { DownOutlined } from "@ant-design/icons";
+import { Dropdown, message, Space } from "antd";
+import { logOut } from "../features/auth/authSlice";
+
 const socket = io(process.env.REACT_APP_URL_SERVER);
 
 const Header = () => {
@@ -73,6 +78,24 @@ const Header = () => {
       }
     });
   }, [acessToken, auth?.data?.user?._id, dispatch]);
+
+  const items = [
+    {
+      label: "Profile",
+      key: "Profile",
+    },
+    {
+      label: "Log out",
+      key: "LogOut",
+    },
+  ];
+
+  const onClick = ({ key }) => {
+    message.info(`Click on ${key}`);
+    if (key === "LogOut") {
+      dispatch(logOut());
+    }
+  };
 
   return (
     <header className="grid grid-cols-12 header">
@@ -215,15 +238,25 @@ const Header = () => {
           <IoMdNotifications />
         </RightItem>
         {/* btn user */}
-        <RightItem id={5}>
-          {/* <BiSolidUser /> */}
 
-          <img
-            className="w-8 h-8 rounded-full"
-            src={auth?.data?.user?.img}
-            alt="logo"
-          />
-        </RightItem>
+        <Dropdown
+          menu={{
+            items,
+            onClick,
+          }}
+        >
+          <Link onClick={(e) => e.preventDefault()}>
+            <RightItem id={5}>
+              {/* <BiSolidUser /> */}
+
+              <img
+                className="w-8 h-8 rounded-full"
+                src={auth?.data?.user?.img}
+                alt="logo"
+              />
+            </RightItem>
+          </Link>
+        </Dropdown>
 
         {/* <div className="wrap-header-right-item header-menu text-xl">
           <CgMenuGridO />
