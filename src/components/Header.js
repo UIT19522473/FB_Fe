@@ -20,8 +20,7 @@ import io from "socket.io-client";
 import { addNotify } from "../features/notify/notifySlice";
 import { getGroupChat } from "../features/chatGroup/chatGroupAsync";
 
-import { DownOutlined } from "@ant-design/icons";
-import { Dropdown, message, Space } from "antd";
+import { Dropdown, message } from "antd";
 import { logOut } from "../features/auth/authSlice";
 
 const socket = io(process.env.REACT_APP_URL_SERVER);
