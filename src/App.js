@@ -15,12 +15,11 @@ import Profile from "./pages/Profile";
 
 import io from "socket.io-client";
 import TestCall from "./pages/TestCall";
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const socket = io(process.env.REACT_APP_URL_SERVER);
 const App = () => {
-
   const auth = useSelector((state) => state?.auth?.data);
   console.log(auth);
 
@@ -30,26 +29,23 @@ const App = () => {
       console.log("Connected to server:", socket.id);
     });
 
-
     if (auth?.user.email) {
       console.log(auth?.user.email);
       socket.on(`${auth?.user.email}`, (data) => {
         const { text, name, emailSend } = data;
-        if (emailSend != auth?.user.email) toast(`${name} ${text} của bạn`);
-      })
+        if (emailSend !== auth?.user.email) toast(`${name} ${text} của bạn`);
+      });
     }
-
 
     socket.on("disconnect", () => {
       console.log("Disconnected from server:", socket.id);
     });
   }, []);
   return (
-      <BrowserRouter>
-        <Routes>
-          {/* <Route path="login" element={<Login />} /> */}
-          {/* <Route path="test" element={<ModalRegister />} /> */}
-
+    <BrowserRouter>
+      <Routes>
+        {/* <Route path="login" element={<Login />} /> */}
+        {/* <Route path="test" element={<ModalRegister />} /> */}
 
         {auth ? (
           <Route path="/" element={<LayOut />}>
